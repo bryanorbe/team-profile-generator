@@ -12,6 +12,22 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlGenerator");
 const employeeArray = [];
 
+// function startApp() {
+//     inquirer.prompt({
+//         type: "list",
+//         message: "Start Application?",
+//         name: "start",
+//         choices: ["Yes", "No"],
+//     }).then(function (startResponse){
+      
+//         if (startResponse === "Yes") {
+//             mainMenu()
+//         } else {
+//             console.error("Maybe next time!");
+//         }
+//     })
+// }
+
 function mainMenu() {
     inquirer.prompt(questions).then(function (response) {
       
@@ -106,3 +122,13 @@ function mainMenu() {
           }
       })
   }
+
+  function createTeam() {
+    const html = render(employeeArray);
+    fs.writeFile(outputPath, html, function(error){
+        if (error)throw error;
+        console.log("Success!")
+    })
+}
+
+mainMenu();
